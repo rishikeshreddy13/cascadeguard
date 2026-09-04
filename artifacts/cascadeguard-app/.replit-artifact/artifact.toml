@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "CascadeGuard"
+description = "A decision-support app that investigates cascading crisis risks, shows the evidence behind them, and highlights the highest-leverage human intervention point."
+version = "1.0.0"
+id = "artifacts/cascadeguard-app"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25013
+
+[services.development]
+run = "pnpm --filter @workspace/cascadeguard-app run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/cascadeguard-app", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/cascadeguard-app/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25013"
+BASE_PATH = "/"
