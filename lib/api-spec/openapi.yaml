@@ -1,0 +1,338 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: CascadeGuard investigation API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: cascadeguard
+    description: Crisis cascade investigation operations
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /scenario/nepal:
+    get:
+      operationId: getNepalScenario
+      tags: [cascadeguard]
+      summary: Get the deterministic Nepal replay scenario
+      description: Returns source-linked evidence prepared for the hackathon demonstration.
+      responses:
+        "200":
+          description: Nepal replay scenario
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Scenario"
+  /analyze:
+    post:
+      operationId: analyzeCascade
+      tags: [cascadeguard]
+      summary: Investigate a cascading crisis risk
+      description: Runs a bounded decision-support investigation over live or replay evidence.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyzeInput"
+      responses:
+        "200":
+          description: Structured investigation result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalysisResult"
+        "400":
+          description: Invalid investigation input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "502":
+          description: Investigation provider unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+    AnalyzeInput:
+      type: object
+      properties:
+        goal:
+          type: string
+          minLength: 1
+          maxLength: 4000
+        mode:
+          type: string
+          enum: [replay, live]
+          default: replay
+        maxSteps:
+          type: number
+          minimum: 1
+          maximum: 6
+          description: Whole-number step limit enforced by the server.
+          default: 3
+      required:
+        - goal
+    Evidence:
+      type: object
+      properties:
+        evidenceId:
+          type: string
+        source:
+          type: string
+        sourceUrl:
+          type: string
+        timestamp:
+          type: string
+        location:
+          type: object
+          additionalProperties: true
+        claim:
+          type: string
+        dataType:
+          type: string
+        sourceTier:
+          type: string
+        confidence:
+          type: number
+          minimum: 0
+          maximum: 1
+        confidenceBasis:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+      required:
+        - evidenceId
+        - source
+        - sourceUrl
+        - timestamp
+        - location
+        - claim
+        - dataType
+        - sourceTier
+        - confidence
+        - confidenceBasis
+        - metadata
+    CandidateRisk:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        chain:
+          type: array
+          items:
+            type: string
+        priority:
+          type: string
+          enum: [critical, high, medium]
+        rationale:
+          type: string
+        evidenceIds:
+          type: array
+          items:
+            type: string
+        intervention:
+          type: string
+      required:
+        - id
+        - title
+        - chain
+        - priority
+        - rationale
+        - evidenceIds
+        - intervention
+    Scenario:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        region:
+          type: string
+        event:
+          type: string
+        mode:
+          type: string
+          enum: [replay]
+        sourceNotice:
+          type: string
+        eventEvidence:
+          type: array
+          items:
+            $ref: "#/components/schemas/Evidence"
+        infrastructureEvidence:
+          type: array
+          items:
+            $ref: "#/components/schemas/Evidence"
+        candidateRisks:
+          type: array
+          items:
+            $ref: "#/components/schemas/CandidateRisk"
+      required:
+        - id
+        - title
+        - region
+        - event
+        - mode
+        - sourceNotice
+        - eventEvidence
+        - infrastructureEvidence
+        - candidateRisks
+    CascadeNodeView:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        kind:
+          type: string
+          enum: [event, failure, dependency, impact, intervention]
+        confidence:
+          type: number
+          minimum: 0
+          maximum: 1
+        evidenceIds:
+          type: array
+          items:
+            type: string
+      required:
+        - id
+        - label
+        - kind
+        - confidence
+        - evidenceIds
+    TraceEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        detail:
+          type: string
+        status:
+          type: string
+          enum: [complete, active, warning]
+      required:
+        - id
+        - label
+        - detail
+        - status
+    AnalysisResult:
+      type: object
+      properties:
+        runId:
+          type: string
+        mode:
+          type: string
+          enum: [replay, live]
+        scenarioId:
+          type: string
+        title:
+          type: string
+        event:
+          type: string
+        location:
+          type: string
+        priority:
+          type: string
+          enum: [critical, high, medium]
+        cascade:
+          type: array
+          items:
+            $ref: "#/components/schemas/CascadeNodeView"
+        impact:
+          type: string
+        intervention:
+          type: string
+        why:
+          type: string
+        confidence:
+          type: number
+          minimum: 0
+          maximum: 1
+        evidence:
+          type: array
+          items:
+            $ref: "#/components/schemas/Evidence"
+        uncertainty:
+          type: array
+          items:
+            type: string
+        trace:
+          type: array
+          items:
+            $ref: "#/components/schemas/TraceEvent"
+        candidates:
+          type: array
+          items:
+            $ref: "#/components/schemas/CandidateRisk"
+        provider:
+          type: string
+          enum: [featherless, replay-engine]
+        providerStatus:
+          type: string
+          enum: [available, fallback, not-configured]
+        sourceNotice:
+          type: string
+        generatedAt:
+          type: string
+      required:
+        - runId
+        - mode
+        - scenarioId
+        - title
+        - event
+        - location
+        - priority
+        - cascade
+        - impact
+        - intervention
+        - why
+        - confidence
+        - evidence
+        - uncertainty
+        - trace
+        - candidates
+        - provider
+        - providerStatus
+        - sourceNotice
+        - generatedAt
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+
