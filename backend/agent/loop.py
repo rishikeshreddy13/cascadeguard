@@ -9,7 +9,11 @@ from typing import Any
 from backend.decision import RankedIntervention, rank_interventions
 from backend.featherless_client import chat_completion
 from backend.models import CascadeGraph
-from backend.tools import fetch_event_context, fetch_nearby_infrastructure
+from backend.tools import (
+    fetch_event_context,
+    fetch_nearby_infrastructure,
+    fetch_nepal_replay,
+)
 
 
 AGENT_INSTRUCTIONS = """\
@@ -22,7 +26,7 @@ claim that a mapped facility is operating or that infrastructure is damaged.
 Return JSON only, with this shape:
 {
   "action": "call_tool" or "final",
-  "tool": "gdacs_event_context" or "nearby_infrastructure" or "",
+  "tool": "gdacs_event_context", "nearby_infrastructure", "nepal_flood_replay" or "",
   "tool_input": {"country": "...", "event_type": "FL", "limit": 5}
     or {"latitude": 27.3, "longitude": 85.36, "radius_km": 5, "limit": 25},
   "what_i_know": ["short statements grounded only in the request"],
@@ -60,7 +64,9 @@ Return JSON only, with this shape:
 }
 
 Use "call_tool" when event facts or nearby mapped infrastructure are missing
-and one of the tools can help. Only use the exact tool names shown above.
+and one of the tools can help. For the deterministic Nepal demo, prefer
+nepal_flood_replay before live tools so the evidence path is reproducible.
+Only use the exact tool names shown above.
 Use "final" only when you can give a clearly labelled provisional conclusion
 from the request and tool evidence. A provisional conclusion is not a
 verified disaster assessment. When final, include a cascade_graph. Use exact
@@ -255,20 +261,26 @@ class BoundedAgent:
     @staticmethod
     def _call_tool(decision: dict[str, Any]) -> dict[str, Any]:
         tool_name = decision.get("tool")
-        if tool_name not in {"gdacs_event_context", "nearby_infrastructure"}:
+        if tool_name not in {"gdacs_event_context", "nearby_infrastructure", "nepal_flood_replay"}:
             return {
                 "tool": tool_name or "",
                 "error": (
-                    "Unknown tool. Available tools: gdacs_event_context and "
-                    "nearby_infrastructure."
+                    "Unknown tool. Available tools: gdacs_event_context, "
+                    "nearby_infrastructure, and nepal_flood_replay."
                 ),
                 "evidence": [],
             }
 
+        if tool_name == "nepal_flood_replay":
+            try:
+                return fetch_nepal_replay()
+            except (TypeError, ValueError, RuntimeError) as error:
+                return {"tool": tool_name, "error": str(error), "evidence": []}
+
         tool_input = decision.get("tool_input")
         if not isinstance(tool_input, dict):
             return {
-                "tool": "gdacs_event_context",
+                "tool": tool_name,
                 "error": "tool_input must be a JSON object.",
                 "evidence": [],
             }
