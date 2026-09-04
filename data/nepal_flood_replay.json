@@ -1,0 +1,404 @@
+{
+  "scenario_id": "nepal-flood-2026",
+  "title": "Nepal flood: event-location infrastructure replay",
+  "description": "Replay of evidence collected from the public GDACS RSS feed and OpenStreetMap for a deterministic hackathon demonstration. The map records feature presence only; they do not establish damage, obstruction, or operation.",
+  "collected_at": "2026-09-04T09:20:25Z",
+  "event": {
+    "tool": "gdacs_event_context",
+    "source": "https://www.gdacs.org/XML/RSS.xml",
+    "retrieved_at": "2026-09-04T09:22:25.628866Z",
+    "query": {
+      "country": "Nepal",
+      "event_type": "FL",
+      "limit": 5
+    },
+    "evidence": [
+      {
+        "source": "GDACS RSS / European Commission Joint Research Centre",
+        "source_url": "https://www.gdacs.org/report.aspx?eventtype=FL&eventid=1104124",
+        "timestamp": "Tue, 01 Sep 2026 13:57:04 GMT",
+        "location": {
+          "country": "Nepal",
+          "iso3": "NPL",
+          "latitude": 27.2952744,
+          "longitude": 85.3649145
+        },
+        "claim": "On 26/08/2026, a flood started in Nepal, lasting until 01/09/2026 (last update). The flood caused 955 deaths and 3458 displaced .",
+        "data_type": "disaster_event",
+        "source_tier": "international_monitoring",
+        "confidence": 0.9,
+        "confidence_basis": "Current public GDACS event feed; not field verification.",
+        "metadata": {
+          "title": "Red flood alert in Nepal",
+          "event_type": "FL",
+          "event_id": "1104124",
+          "glide": "FL-2026-000167-NPL",
+          "alert_level": "Red",
+          "alert_score": 3.0,
+          "is_current": true,
+          "affected_population": "955"
+        },
+        "evidence_id": "557b71dbb58e1f68"
+      }
+    ],
+    "count": 1
+  },
+  "infrastructure": {
+    "tool": "nearby_infrastructure",
+    "source": "https://api.openstreetmap.org/api/0.6/map",
+    "retrieved_at": "2026-09-04T09:22:27.013106Z",
+    "query": {
+      "latitude": 27.2952744,
+      "longitude": 85.3649145,
+      "radius_km": 1,
+      "limit": 25,
+      "bbox": [
+        85.35480584009753,
+        27.28629128825009,
+        85.37502315990247,
+        27.30425751174991
+      ]
+    },
+    "evidence": [
+      {
+        "source": "OpenStreetMap",
+        "source_url": "https://www.openstreetmap.org/way/342390486",
+        "timestamp": "2015-05-02T22:09:31Z",
+        "location": {
+          "latitude": 27.298005096774194,
+          "longitude": 85.36177842258064,
+          "distance_km": 0.434
+        },
+        "claim": "OpenStreetMap maps a stream within 0.43 km of the event.",
+        "data_type": "infrastructure_feature",
+        "source_tier": "open_geographic_data",
+        "confidence": 0.7,
+        "confidence_basis": "Mapped feature presence; operational status and current condition are not verified.",
+        "metadata": {
+          "osm_type": "way",
+          "osm_id": "342390486",
+          "category": "waterway",
+          "kind": "stream",
+          "name": null,
+          "tags": {
+            "waterway": "stream"
+          }
+        },
+        "evidence_id": "3d585bfb1896a009"
+      },
+      {
+        "source": "OpenStreetMap",
+        "source_url": "https://www.openstreetmap.org/way/342390487",
+        "timestamp": "2015-05-02T22:09:31Z",
+        "location": {
+          "latitude": 27.297170286666667,
+          "longitude": 85.35915487666666,
+          "distance_km": 0.607
+        },
+        "claim": "OpenStreetMap maps a stream within 0.61 km of the event.",
+        "data_type": "infrastructure_feature",
+        "source_tier": "open_geographic_data",
+        "confidence": 0.7,
+        "confidence_basis": "Mapped feature presence; operational status and current condition are not verified.",
+        "metadata": {
+          "osm_type": "way",
+          "osm_id": "342390487",
+          "category": "waterway",
+          "kind": "stream",
+          "name": null,
+          "tags": {
+            "waterway": "stream"
+          }
+        },
+        "evidence_id": "5a9827f72f4a8817"
+      },
+      {
+        "source": "OpenStreetMap",
+        "source_url": "https://www.openstreetmap.org/way/342932651",
+        "timestamp": "2015-05-05T09:57:31Z",
+        "location": {
+          "latitude": 27.29152685,
+          "longitude": 85.37075730000001,
+          "distance_km": 0.712
+        },
+        "claim": "OpenStreetMap maps a stream within 0.71 km of the event.",
+        "data_type": "infrastructure_feature",
+        "source_tier": "open_geographic_data",
+        "confidence": 0.7,
+        "confidence_basis": "Mapped feature presence; operational status and current condition are not verified.",
+        "metadata": {
+          "osm_type": "way",
+          "osm_id": "342932651",
+          "category": "waterway",
+          "kind": "stream",
+          "name": null,
+          "tags": {
+            "waterway": "stream"
+          }
+        },
+        "evidence_id": "d8a536fd07d96949"
+      },
+      {
+        "source": "OpenStreetMap",
+        "source_url": "https://www.openstreetmap.org/way/342956524",
+        "timestamp": "2015-05-05T12:02:34Z",
+        "location": {
+          "latitude": 27.28886196,
+          "longitude": 85.36624314000001,
+          "distance_km": 0.725
+        },
+        "claim": "OpenStreetMap maps a stream within 0.73 km of the event.",
+        "data_type": "infrastructure_feature",
+        "source_tier": "open_geographic_data",
+        "confidence": 0.7,
+        "confidence_basis": "Mapped feature presence; operational status and current condition are not verified.",
+        "metadata": {
+          "osm_type": "way",
+          "osm_id": "342956524",
+          "category": "waterway",
+          "kind": "stream",
+          "name": null,
+          "tags": {
+            "waterway": "stream"
+          }
+        },
+        "evidence_id": "d0096d61dc315bfd"
+      },
+      {
+        "source": "OpenStreetMap",
+        "source_url": "https://www.openstreetmap.org/way/342390278",
+        "timestamp": "2015-05-02T22:07:55Z",
+        "location": {
+          "latitude": 27.29595848387097,
+          "longitude": 85.35704600967742,
+          "distance_km": 0.781
+        },
+        "claim": "OpenStreetMap maps a stream within 0.78 km of the event.",
+        "data_type": "infrastructure_feature",
+        "source_tier": "open_geographic_data",
+        "confidence": 0.7,
+        "confidence_basis": "Mapped feature presence; operational status and current condition are not verified.",
+        "metadata": {
+          "osm_type": "way",
+          "osm_id": "342390278",
+          "category": "waterway",
+          "kind": "stream",
+          "name": null,
+          "tags": {
+            "waterway": "stream"
+          }
+        },
+        "evidence_id": "a6753b3723ecdcc1"
+      },
+      {
+        "source": "OpenStreetMap",
+        "source_url": "https://www.openstreetmap.org/way/597752400",
+        "timestamp": "2018-06-14T10:50:11Z",
+        "location": {
+          "latitude": 27.288758925,
+          "longitude": 85.3684293375,
+          "distance_km": 0.803
+        },
+        "claim": "OpenStreetMap maps a path within 0.80 km of the event.",
+        "data_type": "infrastructure_feature",
+        "source_tier": "open_geographic_data",
+        "confidence": 0.7,
+        "confidence_basis": "Mapped feature presence; operational status and current condition are not verified.",
+        "metadata": {
+          "osm_type": "way",
+          "osm_id": "597752400",
+          "category": "highway",
+          "kind": "path",
+          "name": null,
+          "tags": {
+            "highway": "path"
+          }
+        },
+        "evidence_id": "934bc94dc12519b4"
+      },
+      {
+        "source": "OpenStreetMap",
+        "source_url": "https://www.openstreetmap.org/way/597752403",
+        "timestamp": "2018-06-14T10:50:11Z",
+        "location": {
+          "latitude": 27.288971041666667,
+          "longitude": 85.36897153333332,
+          "distance_km": 0.807
+        },
+        "claim": "OpenStreetMap maps a path within 0.81 km of the event.",
+        "data_type": "infrastructure_feature",
+        "source_tier": "open_geographic_data",
+        "confidence": 0.7,
+        "confidence_basis": "Mapped feature presence; operational status and current condition are not verified.",
+        "metadata": {
+          "osm_type": "way",
+          "osm_id": "597752403",
+          "category": "highway",
+          "kind": "path",
+          "name": null,
+          "tags": {
+            "highway": "path"
+          }
+        },
+        "evidence_id": "e6b3624dea260b7e"
+      },
+      {
+        "source": "OpenStreetMap",
+        "source_url": "https://www.openstreetmap.org/way/597752407",
+        "timestamp": "2018-06-14T10:50:11Z",
+        "location": {
+          "latitude": 27.288846483333334,
+          "longitude": 85.36959038333333,
+          "distance_km": 0.851
+        },
+        "claim": "OpenStreetMap maps a path within 0.85 km of the event.",
+        "data_type": "infrastructure_feature",
+        "source_tier": "open_geographic_data",
+        "confidence": 0.7,
+        "confidence_basis": "Mapped feature presence; operational status and current condition are not verified.",
+        "metadata": {
+          "osm_type": "way",
+          "osm_id": "597752407",
+          "category": "highway",
+          "kind": "path",
+          "name": null,
+          "tags": {
+            "highway": "path"
+          }
+        },
+        "evidence_id": "750eec6a4938199a"
+      },
+      {
+        "source": "OpenStreetMap",
+        "source_url": "https://www.openstreetmap.org/way/597749133",
+        "timestamp": "2018-06-14T10:42:25Z",
+        "location": {
+          "latitude": 27.296461620000002,
+          "longitude": 85.37353178000001,
+          "distance_km": 0.862
+        },
+        "claim": "OpenStreetMap maps a path within 0.86 km of the event.",
+        "data_type": "infrastructure_feature",
+        "source_tier": "open_geographic_data",
+        "confidence": 0.7,
+        "confidence_basis": "Mapped feature presence; operational status and current condition are not verified.",
+        "metadata": {
+          "osm_type": "way",
+          "osm_id": "597749133",
+          "category": "highway",
+          "kind": "path",
+          "name": null,
+          "tags": {
+            "highway": "path"
+          }
+        },
+        "evidence_id": "1b098c9d4797ec4f"
+      },
+      {
+        "source": "OpenStreetMap",
+        "source_url": "https://www.openstreetmap.org/way/597752405",
+        "timestamp": "2018-06-14T10:50:11Z",
+        "location": {
+          "latitude": 27.289593869999997,
+          "longitude": 85.37088674,
+          "distance_km": 0.864
+        },
+        "claim": "OpenStreetMap maps a path within 0.86 km of the event.",
+        "data_type": "infrastructure_feature",
+        "source_tier": "open_geographic_data",
+        "confidence": 0.7,
+        "confidence_basis": "Mapped feature presence; operational status and current condition are not verified.",
+        "metadata": {
+          "osm_type": "way",
+          "osm_id": "597752405",
+          "category": "highway",
+          "kind": "path",
+          "name": null,
+          "tags": {
+            "highway": "path"
+          }
+        },
+        "evidence_id": "f86be9158fba089a"
+      },
+      {
+        "source": "OpenStreetMap",
+        "source_url": "https://www.openstreetmap.org/way/597752863",
+        "timestamp": "2018-06-14T10:52:13Z",
+        "location": {
+          "latitude": 27.28732146666667,
+          "longitude": 85.36919115,
+          "distance_km": 0.98
+        },
+        "claim": "OpenStreetMap maps a path within 0.98 km of the event.",
+        "data_type": "infrastructure_feature",
+        "source_tier": "open_geographic_data",
+        "confidence": 0.7,
+        "confidence_basis": "Mapped feature presence; operational status and current condition are not verified.",
+        "metadata": {
+          "osm_type": "way",
+          "osm_id": "597752863",
+          "category": "highway",
+          "kind": "path",
+          "name": null,
+          "tags": {
+            "highway": "path"
+          }
+        },
+        "evidence_id": "ecf004af2924bb9f"
+      },
+      {
+        "source": "OpenStreetMap",
+        "source_url": "https://www.openstreetmap.org/way/597749136",
+        "timestamp": "2021-04-29T11:14:54Z",
+        "location": {
+          "latitude": 27.295772132142854,
+          "longitude": 85.37486611071428,
+          "distance_km": 0.985
+        },
+        "claim": "OpenStreetMap maps a path within 0.98 km of the event.",
+        "data_type": "infrastructure_feature",
+        "source_tier": "open_geographic_data",
+        "confidence": 0.7,
+        "confidence_basis": "Mapped feature presence; operational status and current condition are not verified.",
+        "metadata": {
+          "osm_type": "way",
+          "osm_id": "597749136",
+          "category": "highway",
+          "kind": "path",
+          "name": null,
+          "tags": {
+            "highway": "path"
+          }
+        },
+        "evidence_id": "b338059d94defbe2"
+      },
+      {
+        "source": "OpenStreetMap",
+        "source_url": "https://www.openstreetmap.org/way/597752864",
+        "timestamp": "2018-06-14T10:52:13Z",
+        "location": {
+          "latitude": 27.287410225000002,
+          "longitude": 85.369667875,
+          "distance_km": 0.993
+        },
+        "claim": "OpenStreetMap maps a path within 0.99 km of the event.",
+        "data_type": "infrastructure_feature",
+        "source_tier": "open_geographic_data",
+        "confidence": 0.7,
+        "confidence_basis": "Mapped feature presence; operational status and current condition are not verified.",
+        "metadata": {
+          "osm_type": "way",
+          "osm_id": "597752864",
+          "category": "highway",
+          "kind": "path",
+          "name": null,
+          "tags": {
+            "highway": "path"
+          }
+        },
+        "evidence_id": "5463b988da602b5d"
+      }
+    ],
+    "count": 13
+  }
+}
